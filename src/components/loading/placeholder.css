@@ -1,0 +1,44 @@
+/* YouTube-like skeleton loading CSS */
+.skeleton-placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.skeleton-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.skeleton-item {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    width: 20%;
+    height: 12px;
+    animation: shimmer 1.5s infinite linear;
+}
+
+.skeleton-item-large {
+    width: 40%;
+}
+
+.skeleton-item-small {
+    width: 10%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-color: #e0e0e0;
+    }
+    50% {
+        background-color: #f5f5f5;
+    }
+    100% {
+        background-color: #e0e0e0;
+    }
+}

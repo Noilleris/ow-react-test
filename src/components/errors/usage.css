@@ -1,0 +1,47 @@
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f9f9f9;
+    position: fixed;
+    top: 0;
+}
+
+.error-content {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.error-title {
+    color: #ff6b6b;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.reload-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reload-button:hover {
+    background-color: #ff4c4c;
+}

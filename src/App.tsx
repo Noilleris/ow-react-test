@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SortableTable from "./components/datatable/Table";
+import Header from "./components/header/header";
+import UsageBarChart from "./components/charts/usage";
+import useFetchData from "./state/usage";
+import UsageErrorMessage from "./components/errors/usage";
 
 function App() {
+  const {data, isLoading, error} = useFetchData("http://127.0.0.1:5000/usage");
+
+  if (error) {
+    return (
+      <div className="App">
+        <Header />
+        <UsageErrorMessage message={error}/>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+
+      <UsageBarChart data={data} isLoading={isLoading} />
+      <SortableTable data={data} isLoading={isLoading} />
     </div>
   );
 }
