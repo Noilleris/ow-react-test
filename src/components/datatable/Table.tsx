@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   flexRender,
   useReactTable,
@@ -9,7 +9,8 @@ import "./datatable.css";
 import useSorting from "../../state/dataSort";
 import prettifyDateTime from "../../utility/tableDateTime";
 import Placeholder from "../loading/placeholder";
-import {UsageEntry} from "../../types/usage"; // Import the CSS file
+import {UsageEntry} from "../../types/usage";
+import { useSearchParams } from "react-router-dom";
 
 interface UsageTablesProps {
   data: UsageEntry[];
@@ -18,11 +19,28 @@ interface UsageTablesProps {
 
 const UsageTable: React.FC<UsageTablesProps> = ({ data, isLoading }) => {
   const {sorting, setSorting} = useSorting();
+  const [searchParams, setSearchParams] = useSearchParams(); // For URL handling
+
+
+  useEffect(() => {
+    // Fetch initial sorting from URL and update state
+    const sortParam = searchParams.get("sort");
+    const orderParam = searchParams.get("order");
+
+    if (sortParam && orderParam) {
+      setSorting([
+        {
+          id: sortParam,
+          desc: orderParam === "desc",
+        },
+      ]);
+    }
+  }, [searchParams, setSorting]);
 
   const columns = [
     {
       header: () => 'Message ID',
-      accessorKey: 'message_id', // use built-in sorting function by name
+      accessorKey: 'message_id',
     },
     {
       header: () => 'Timestamp',
@@ -46,7 +64,19 @@ const UsageTable: React.FC<UsageTablesProps> = ({ data, isLoading }) => {
     state: {
       sorting: sorting
     },
-    onSortingChange: setSorting,
+    onSortingChange: (newSorting) => {
+      setSorting(newSorting);
+      const newSortingValue = newSorting instanceof Function ? newSorting(sorting) : newSorting
+
+      if (newSortingValue.length > 0) {
+        setSearchParams({
+          sort: newSortingValue[0].id,
+          order: newSortingValue[0].desc ? "desc" : "asc",
+        });
+      } else {
+        setSearchParams({}); // Clear sorting params if not sorted
+      }
+    },
     pageCount: Math.ceil(data.length / 10), // Total pages based on data length
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

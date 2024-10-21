@@ -5,26 +5,31 @@ import Header from "./components/header/header";
 import UsageBarChart from "./components/charts/usage";
 import useFetchData from "./state/usage";
 import UsageErrorMessage from "./components/errors/usage";
+import {BrowserRouter} from "react-router-dom";
 
 function App() {
   const {data, isLoading, error} = useFetchData("http://127.0.0.1:5000/usage");
 
   if (error) {
     return (
-      <div className="App">
-        <Header />
-        <UsageErrorMessage message={error}/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Header/>
+          <UsageErrorMessage message={error}/>
+        </div>
+      </BrowserRouter>
     );
   }
 
   return (
-    <div className="App">
-      <Header />
+    <BrowserRouter>
+      <div className="App">
+        <Header/>
 
-      <UsageBarChart data={data} isLoading={isLoading} />
-      <UsageTable data={data} isLoading={isLoading} />
-    </div>
+        <UsageBarChart data={data} isLoading={isLoading}/>
+        <UsageTable data={data} isLoading={isLoading}/>
+      </div>
+    </BrowserRouter>
   );
 }
 
