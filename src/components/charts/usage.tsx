@@ -25,7 +25,7 @@ const UsageBarChart: React.FC<UsageBarChartProps> = ({data, isLoading}) => {
 
     return Object.keys(grouped).map((day) => ({
       day,
-      totalCreditsUsed: grouped[day].toFixed(2),
+      CreditsUsed: grouped[day].toFixed(2),
     }));
   }, [data]);
 
