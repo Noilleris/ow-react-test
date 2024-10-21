@@ -25,7 +25,7 @@ const UsageBarChart: React.FC<UsageBarChartProps> = ({data, isLoading}) => {
 
     return Object.keys(grouped).map((day) => ({
       day,
-      totalCreditsUsed: grouped[day],
+      totalCreditsUsed: grouped[day].toFixed(2),
     }));
   }, [data]);
 
@@ -45,7 +45,7 @@ const UsageBarChart: React.FC<UsageBarChartProps> = ({data, isLoading}) => {
           <XAxis dataKey="day"/>
           <YAxis/>
           <Tooltip/>
-          <Bar dataKey="totalCreditsUsed" fill="#8884d8"/>
+          <Bar dataKey="CreditsUsed" fill="#8884d8"/>
         </BarChart>
       </ResponsiveContainer>: <div>No data</div>}
     </div>

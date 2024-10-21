@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import DataTable from "./Table";
+import UsageTable from "./Table";
 
 test('check placeholder works', () => {
-  render(<DataTable data={[]} isLoading={true} />);
+  render(<UsageTable data={[]} isLoading={true} />);
   const placeholder = screen.getByTestId("skeleton-placeholder");
   const table = screen.queryByTestId("table-container");
 
@@ -12,7 +12,7 @@ test('check placeholder works', () => {
 });
 
 test('check table works', () => {
-  render(<DataTable data={[]} isLoading={false} />);
+  render(<UsageTable data={[]} isLoading={false} />);
   const placeholder = screen.queryByTestId("skeleton-placeholder");
   const table = screen.getByTestId("table-container");
 

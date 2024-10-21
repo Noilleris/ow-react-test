@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SortableTable from "./components/datatable/Table";
+import UsageTable from "./components/datatable/Table";
 import Header from "./components/header/header";
 import UsageBarChart from "./components/charts/usage";
 import useFetchData from "./state/usage";
@@ -23,7 +23,7 @@ function App() {
       <Header />
 
       <UsageBarChart data={data} isLoading={isLoading} />
-      <SortableTable data={data} isLoading={isLoading} />
+      <UsageTable data={data} isLoading={isLoading} />
     </div>
   );
 }

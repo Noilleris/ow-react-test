@@ -11,12 +11,12 @@ import prettifyDateTime from "../../utility/tableDateTime";
 import Placeholder from "../loading/placeholder";
 import {UsageEntry} from "../../types/usage"; // Import the CSS file
 
-interface DataTableProps {
+interface UsageTablesProps {
   data: UsageEntry[];
   isLoading: boolean;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ data, isLoading }) => {
+const UsageTable: React.FC<UsageTablesProps> = ({ data, isLoading }) => {
   const {sorting, setSorting} = useSorting();
 
   const columns = [
@@ -36,6 +36,7 @@ const DataTable: React.FC<DataTableProps> = ({ data, isLoading }) => {
     {
       header: () => 'Credits Used',
       accessorKey: 'credits_used',
+      cell: (info: {getValue: () => number }) => info.getValue().toFixed(2)
     }
   ]
 
@@ -109,4 +110,4 @@ const DataTable: React.FC<DataTableProps> = ({ data, isLoading }) => {
   );
 };
 
-export default DataTable;
+export default UsageTable;
